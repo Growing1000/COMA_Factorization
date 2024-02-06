@@ -1,14 +1,17 @@
 from functools import partial
-from smac.env import MultiAgentEnv, StarCraft2Env
-import sys
-import os
 
-def env_fn(env, **kwargs) -> MultiAgentEnv:
+from .multiagentenv import MultiAgentEnv
+from .stag_hunt import StagHunt
+from smac.env import MultiAgentEnv, StarCraft2Env
+from .matrix_game.matrix_game_simple import Matrixgame
+
+# TODO: Do we need this?
+def env_fn(env, **kwargs) -> MultiAgentEnv: # TODO: this may be a more complex function
+    # env_args = kwargs.get("env_args", {})
     return env(**kwargs)
 
-REGISTRY = {}
-REGISTRY["sc2"] = partial(env_fn, env=StarCraft2Env)
 
-if sys.platform == "linux":
-    os.environ.setdefault("SC2PATH",
-                          os.path.join(os.getcwd(), "3rdparty", "StarCraftII"))
+REGISTRY = {}
+REGISTRY["matrix_game"] = partial(env_fn, env=Matrixgame)
+REGISTRY["stag_hunt"] = partial(env_fn, env=StagHunt)
+REGISTRY["sc2"] = partial(env_fn, env=StarCraft2Env)
