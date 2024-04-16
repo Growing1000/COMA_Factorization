@@ -60,6 +60,17 @@ class StagHunt(MultiAgentEnv):
 
     def __init__(self, batch_size=None, **kwargs):
         # Unpack arguments from sacred
+        print('='*300)
+        print('='*300)
+        print('='*300)
+
+        print("the kwargs is :", kwargs)
+
+        print('='*300)
+        print('='*300)
+        print('='*300)
+
+
         args = kwargs["env_args"]
         if isinstance(args, dict):
             args = convert(args)
